@@ -50,11 +50,11 @@ public class AccountsRepositoryInMemory implements AccountsRepository {
         if(fromAccountTxnBalance > 0) {
           fromAccount.setBalance(fromAccountTxnBalance);
 	  accounts.put(fromAccount.getAccountId(), fromAccount);
-	  notificationService.notifyAboutTransfer(fromAccount, "Amount debited "+amount);
+	  notificationService.notifyAboutTransfer(fromAccount, "Amount debited and transferred to recepient "+ toAccount.getAccountId()+ " : "+amount);
           BigDecimal ToAccountTxnBalance = toAccount.getBalance().add(amount);
 	  toAccount.setBalance(ToAccountTxnBalance);
           accounts.put(toAccount.getAccountId(), toAccount);
-	  notificationService.notifyAboutTransfer(fromAccount, "Amount credited "+amount);
+	  notificationService.notifyAboutTransfer(fromAccount, "Amount credited and transferred from recepient " +fromAccount.getAccountId()+ ":" +amount);
         }
 	else {
           throw new InsufficientBalanceException(
