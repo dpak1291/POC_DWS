@@ -5,6 +5,7 @@ import com.dws.challenge.repository.AccountsRepository;
 import lombok.Getter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import java.math.BigDecimal;
 
 @Service
@@ -26,6 +27,7 @@ public class AccountsService {
     return this.accountsRepository.getAccount(accountId);
   }
 
+  @Transactional
   public void transferBalance(String accountFrom, String accountTo, BigDecimal amount) {
     return this.accountsRepository.transferBalance(accountFrom, accountTo, amount);
   }
